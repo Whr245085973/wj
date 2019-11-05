@@ -36,10 +36,13 @@ public class LoginController {
 //        subject.getSession().setTimeout(10000);
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, requestUser.getPassword());
         try {
+            log.info("用户："+username+"开始登录。");
             subject.login(usernamePasswordToken);
+            log.info("用户："+username+"登录成功！");
             return ResultFactory.buildSuccessResult(usernamePasswordToken);
         } catch (AuthenticationException e) {
             String message = "账号密码错误";
+            log.info("登录账号或密码错误！");
             return ResultFactory.buildFailResult(message);
         }
     }
@@ -49,6 +52,7 @@ public class LoginController {
     public Result register(@RequestBody User user) {
         String username = user.getUsername();
         String password = user.getPassword();
+        log.info("用户："+username+"申请注册。");
         username = HtmlUtils.htmlEscape(username);
         user.setUsername(username);
 
@@ -56,6 +60,7 @@ public class LoginController {
 
         if (exist) {
             String message = "用户名已被使用";
+            log.info("用户："+username+"已存在。");
             return ResultFactory.buildFailResult(message);
         }
 
@@ -67,7 +72,7 @@ public class LoginController {
         user.setSalt(salt);
         user.setPassword(encodedPassword);
         userService.add(user);
-
+        log.info("用户："+username+"注册成功。");
         return ResultFactory.buildSuccessResult(user);
     }
 
@@ -77,6 +82,7 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         String message = "成功登出";
+        log.info("用户已退出！");
         return ResultFactory.buildSuccessResult(message);
     }
 
