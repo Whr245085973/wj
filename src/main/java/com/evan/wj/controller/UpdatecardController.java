@@ -28,7 +28,7 @@ public class UpdatecardController {
      */
     @GetMapping("api/updatecard")
     @ResponseBody
-    public List<Updatecard> find(){
+    public List<Updatecard> list(){
         return updatecardService.list();
     }
 
