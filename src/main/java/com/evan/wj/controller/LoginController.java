@@ -35,6 +35,7 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
 //        subject.getSession().setTimeout(10000);
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, requestUser.getPassword());
+        usernamePasswordToken.setRememberMe(true);
         try {
             log.info("用户："+username+"开始登录。");
             subject.login(usernamePasswordToken);
@@ -52,6 +53,9 @@ public class LoginController {
     public Result register(@RequestBody User user) {
         String username = user.getUsername();
         String password = user.getPassword();
+        if (""==username || ""==password){
+            return ResultFactory.buildFailResult("用户密码不能为空");
+        }
         log.info("用户："+username+"申请注册。");
         username = HtmlUtils.htmlEscape(username);
         user.setUsername(username);
@@ -89,6 +93,7 @@ public class LoginController {
     @ResponseBody
     @GetMapping(value = "api/authentication")
     public String authentication(@RequestHeader("Token") String token, HttpSession session, HttpResponse response){
+        log.info("身份认证成功");
         return "身份认证成功";
 //        if (token.replace("\"", "").equals(session.getAttribute("token"))) {
 //            return "身份认证成功";

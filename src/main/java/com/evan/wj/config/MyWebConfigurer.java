@@ -22,6 +22,7 @@ public class MyWebConfigurer implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/index.html")
                 .excludePathPatterns("/api/login")
+                .excludePathPatterns("/api/register")
                 .excludePathPatterns("/api/logout");
     }
 
@@ -32,8 +33,7 @@ public class MyWebConfigurer implements WebMvcConfigurer {
                 .allowCredentials(true)
                 .allowedOrigins("http://localhost:8080")
                 .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
-                .allowedHeaders("*")
-                .maxAge(3600);
+                .allowedHeaders("*");
     }
 
     @Override
