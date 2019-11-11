@@ -1,7 +1,8 @@
 package com.evan.wj.controller;
 
+import com.evan.wj.pojo.Horselamp;
 import com.evan.wj.pojo.Updatecard;
-import com.evan.wj.service.UpdatecardService;
+import com.evan.wj.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,10 @@ import java.util.List;
  * @create: 2019/11/5 11:42
  **/
 @Controller
-public class UpdatecardController {
+public class IndexController {
 
     @Autowired
-    UpdatecardService updatecardService;
+    IndexService indexService;
     /**
      * @description:  查询最新更新的几条数据
      * @param
@@ -28,8 +29,15 @@ public class UpdatecardController {
      */
     @GetMapping("api/updatecard")
     @ResponseBody
-    public List<Updatecard> list(){
-        return updatecardService.list();
+    public List<Updatecard> updatecardList(){
+        return indexService.updatecardList();
     }
+
+    @GetMapping("api/horselamp")
+    @ResponseBody
+    public List<Horselamp> horselampList(){
+        return indexService.horselampList();
+    }
+
 
 }

@@ -1,15 +1,12 @@
 package com.evan.wj;
 
 import com.evan.wj.dao.UpdatecardDAO;
-import com.evan.wj.pojo.Updatecard;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,15 +18,26 @@ public class WjApplicationTests {
 
     @Test
     public void contextLoads() {
-        log.info("123");
-        System.out.println("开始");
-        log.info("456");
+
+
+
     }
     @Test
     public void test(){
-        List<Updatecard> name = updatecardDAO.findAll();
-        if (name!=null){
-            System.out.println("1");
+        int flag = 0;
+        /*if(flag!=3 && flag==2){
+            System.out.println("test");
+        }else if (flag!=3 && flag!=2){
+            System.out.println("2");
+        }*/
+
+        if(flag!=3){
+
+            if (flag == 2){
+                System.out.println("test");
+            }else{
+                System.out.println("2");
+            }
         }
     }
 

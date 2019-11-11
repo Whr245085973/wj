@@ -1,6 +1,8 @@
 package com.evan.wj.service;
 
+import com.evan.wj.dao.HorselampDAO;
 import com.evan.wj.dao.UpdatecardDAO;
+import com.evan.wj.pojo.Horselamp;
 import com.evan.wj.pojo.Updatecard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,13 +19,15 @@ import java.util.List;
  * @create: 2019/11/5 13:06
  **/
 @Service
-public class UpdatecardService {
+public class IndexService {
     @Autowired
     UpdatecardDAO updatecardDAO;
+    @Autowired
+    HorselampDAO horselampDAO;
     /**
      JPA中有一种分页接口，利用Pageable对我们findAll出来的数据进行分页排序。
      */
-    public List<Updatecard> list(){
+    public List<Updatecard> updatecardList(){
         Sort sort = new Sort(Sort.Direction.DESC, "date");
         Pageable pageable = PageRequest.of(0, 5,sort);
         Page<Updatecard> updatecardsPage = updatecardDAO.findAll(pageable);
@@ -43,5 +47,8 @@ public class UpdatecardService {
         return PageRequest.of(pageNumber - 1, pagzSize, sort);
     }
 
-
+    public List<Horselamp> horselampList(){
+        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        return horselampDAO.findAll(sort);
+    }
 }
